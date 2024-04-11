@@ -20,5 +20,7 @@ use App\Http\Controllers\CategoryController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::resource('categories', 'CategoryController');
+//Задание 16.1
 Route::resource('products', 'ProductController');
+Route::resource('categories', 'CategoryController');
+
