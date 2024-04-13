@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
+
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -24,6 +26,8 @@ class ProductController extends Controller
      */
     public function create()
     {
+        $categories = Category::all();
+
         return view('product.create');
     }
 
@@ -34,17 +38,11 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'detail' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'name_tovar' => 'required',
+            'category' => 'required',
         ]);
         $input = $request->all();
-        if ($image = $request->file('image')) {
-            $destinationPath = 'images/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $input['image'] = "$profileImage";
-        }
+
         Product::create($input);
         return redirect()->route('products.index')
             ->with('success', 'Product created successfully.');
@@ -56,6 +54,8 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+        $categories = Category::all();
+
         return view('product.show', compact('product'));
     }
 
@@ -65,6 +65,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        $categories = Category::all();
         return view('product.edit', compact('product'));
     }
 
@@ -75,18 +76,11 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $request->validate([
-            'name' => 'required',
-            'detail' => 'required'
+            'name_tovar' => 'required',
+            'category' => 'required'
         ]);
         $input = $request->all();
-        if ($image = $request->file('image')) {
-            $destinationPath = 'images/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $input['image'] = "$profileImage";
-        } else {
-            unset($input['image']);
-        }
+
         $product->update($input);
         return redirect()->route('products.index')
             ->with('success', 'Product updated successfully');

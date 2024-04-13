@@ -9,7 +9,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::latest()->paginate(5);
+        $categories = Category::all();
         return view('categories.index', compact('categories'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
@@ -22,7 +22,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'category' =>'required',
         ]);
         Category::create($request->all());
         return redirect()->route('categories.index')
@@ -42,7 +42,7 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $request->validate([
-            'name' => 'required',
+            'category' =>'required',
         ]);
         $category->update($request->all());
         return redirect()->route('categories.index')
@@ -55,4 +55,9 @@ class CategoryController extends Controller
         return redirect()->route('categories.index')
             ->with('success', 'Category deleted successfully');
     }
+    public function indexByCategory(Category $category)
+{
+    $products = $category->products;
+    return view('products.index', compact('products'));
+}
 }

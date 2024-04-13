@@ -23,18 +23,16 @@
 
     <table class="table table-bordered" style="margin-top: 20px;">
         <tr>
-            <th>No</th>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Details</th>
+            <th>Nomer</th>
+            <th>name_tovar</th>
+            <th>category</th>
             <th width="280px">Action</th>
         </tr>
         @foreach ($products as $product)
             <tr>
                 <td>{{ ++$i }}</td>
-                <td><img src="/images/{{ $product->image }}" width="100px"></td>
-                <td>{{ $product->name }}</td>
-                <td>{{ $product->detail }}</td>
+                <td>{{ $product->name_tovar }}</td>
+                <td>{{ $product->category }}</td>
                 <td>
                     <form action="{{ route('products.destroy', $product->id) }}" method="POST">
 

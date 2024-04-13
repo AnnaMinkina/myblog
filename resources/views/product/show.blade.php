@@ -15,20 +15,14 @@
     <div class="row" style="margin-top: 20px;text-align: center;">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Name:</strong><br>
-                {{ $product->name }}
+                <strong>name_tovar:</strong><br>
+                {{ $product->name_tovar }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: 20px;">
             <div class="form-group">
-                <strong>Details:</strong><br>
-                {{ $product->detail }}
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: 20px;">
-            <div class="form-group">
-                <strong>Image:</strong><br>
-                <img src="/images/{{ $product->image }}" width="200px">
+                <strong>category:</strong><br>
+                {{ $product->category }}
             </div>
         </div>
     </div>
